@@ -42,3 +42,135 @@
   .vh-100{
     height:100vh;
   }
+
+  /* Navbar 스타일 */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: #000;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  /* 로고 스타일 */
+  .navbar-logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  /* 메뉴 스타일 */
+  .navbar-menu {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .menu-item {
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .menu-item:hover {
+    color: #a9a9a9;
+  }
+  
+  /* 아이콘 영역 */
+  .navbar-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .icon-label {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #ffffff;
+  }
+  
+  .icon:hover {
+    color: #a9a9a9;
+  }
+  
+  /* 햄버거 메뉴 스타일 */
+  .hamburger {
+    display: none; /* 기본적으로 숨김 */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+  
+  /* 모바일 반응형 스타일 */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none; /* 기본적으로 숨김 */
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      background-color: #000;
+      padding: 10px 0;
+      z-index: 999;
+      align-items: center; /* 가로 방향 가운데 정렬 */
+      justify-content: center; /* 세로 방향 가운데 정렬 */
+      text-align: center; /* 텍스트 가운데 정렬 */
+    }
+  
+    .menu-item {
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .menu-item.active {
+      color: #a9a9a9; /* 활성화된 메뉴의 색상 */
+    }
+  
+  
+    .navbar-menu.active {
+      display: flex; /* 활성화 시 표시 */
+    }
+  
+    .navbar-icons {
+      display: flex; /* 아이콘도 메뉴 안에 표시 */
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+  
+    .icon-img {
+      display: none; /* 아이콘만 숨김 */
+    }
+
+    .icon-label:hover {
+      color: #a9a9a9;
+    }
+  
+    .hamburger {
+      display: flex; /* 모바일에서 햄버거 표시 */
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+  }
+  
