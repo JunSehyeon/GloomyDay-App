@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-
 import "./style/register.style.css";
 
-import { registerUser } from "../../features/user/userSlice";
-
 const RegisterPage = () => {
-  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -16,26 +9,29 @@ const RegisterPage = () => {
     confirmPassword: "",
     policy: false,
   });
-  const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
   const [policyError, setPolicyError] = useState(false);
-  const { registrationError } = useSelector((state) => state.user);
+  const [registrationError, setRegistrationError] = useState(null);
 
   const register = (event) => {
     event.preventDefault();
     const { name, email, password, confirmPassword, policy } = formData;
     const checkConfirmPassword = password === confirmPassword;
+
     if (!checkConfirmPassword) {
-      setPasswordError("비밀번호 중복확인이 일치하지 않습니다.");
+      setPasswordError("Password duplicate checks do not match.");
       return;
     }
+
     if (!policy) {
       setPolicyError(true);
       return;
     }
+
     setPasswordError("");
     setPolicyError(false);
-    dispatch(registerUser({ name, email, password, navigate }));
+    // Dispatch or API call for registration can go here
+    console.log("User registered", { name, email, password });
   };
 
   const handleChange = (event) => {
@@ -51,74 +47,56 @@ const RegisterPage = () => {
   };
 
   return (
-    <Container className="register-area">
-      {registrationError && (
-        <div>
-          <Alert variant="danger" className="error-message">
-            {registrationError}
-          </Alert>
-        </div>
-      )}
-      <Form onSubmit={register}>
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
+    <div className="register-area">
+      {registrationError && <div className="error-message">{registrationError}</div>}
+      <form onSubmit={register} className="register-form">
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
             type="email"
             id="email"
             placeholder="Enter email"
             onChange={handleChange}
             required
           />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
+        </div>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
             type="text"
             id="name"
             placeholder="Enter name"
             onChange={handleChange}
             required
           />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
             type="password"
             id="password"
             placeholder="Password"
             onChange={handleChange}
             required
           />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
+        </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
             type="password"
             id="confirmPassword"
             placeholder="Confirm Password"
             onChange={handleChange}
             required
-            isInvalid={passwordError}
+            className={passwordError ? "invalid" : ""}
           />
-          <Form.Control.Feedback type="invalid">
-            {passwordError}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Check
-            type="checkbox"
-            label="이용약관에 동의합니다"
-            id="policy"
-            onChange={handleChange}
-            isInvalid={policyError}
-            checked={formData.policy}
-          />
-        </Form.Group>
-        <Button variant="danger" type="submit">
-          회원가입
-        </Button>
-      </Form>
-    </Container>
+          {passwordError && <span className="error-text">{passwordError}</span>}
+        </div>
+        <button type="submit" className="submit-button">
+          Join membership
+        </button>
+      </form>
+    </div>
   );
 };
 
