@@ -11,8 +11,8 @@ const ToastMessage = () => {
       const { message, status } = toastMessage;
       if (message !== "" && status !== "") {
         toast[status](message, {
-          theme: "dark", // 다크 테마
-          progressStyle: { background: "#ffffff" }, // 진행 바 스타일(흰색)
+          theme: "dark",
+          progressStyle: { background: "#ffffff" },
         });
       }
     }
@@ -21,15 +21,15 @@ const ToastMessage = () => {
   return (
     <ToastContainer
       position="top-right"
-      autoClose={5000} // 5초 뒤 닫힘
-      hideProgressBar={false} // 진행 바 표시
+      autoClose={5000} 
+      hideProgressBar={false} 
       newestOnTop={false}
       closeOnClick
       rtl={false}
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="dark" // 전체 컨테이너 다크 테마
+      theme="dark" 
     />
   );
 };
