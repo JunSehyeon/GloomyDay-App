@@ -40,7 +40,7 @@ const OrderTable = ({ header, data, openEditForm }) => {
               </tr>
             ))
           ) : (
-            <tr>No Data to show</tr>
+            <tr style={{ color: "#FFFFFF" }}>No Data to show</tr>
           )}
         </tbody>
       </Table>

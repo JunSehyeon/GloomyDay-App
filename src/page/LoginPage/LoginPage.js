@@ -25,6 +25,11 @@ const Login = () => {
     dispatch(loginWithEmail({ email, password }));
   };
 
+  const handleGoogleLogin = async (googleData) => {
+    // Handle Google login success logic here
+    console.log("Google login successful:", googleData);
+  };
+
   if (user) {
     navigate("/");
   }
@@ -36,6 +41,7 @@ const Login = () => {
           <div className="alert alert-danger">Login failed. Please try again.</div>
         </div>
       )}
+
       <form className="login-form" onSubmit={handleLoginWithEmail}>
         <div className="form-group">
           <input
@@ -63,6 +69,19 @@ const Login = () => {
           SIGN IN
         </a>
       </form>
+      <div className="text-align-center mt-2">
+        <p>- Sign in with Google -</p>
+        <div className="display-center">
+          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => {
+                console.log("Google Login Failed");
+              }}
+            />
+          </GoogleOAuthProvider>
+        </div>
+      </div>
       
     </div>
   );
