@@ -1,3 +1,4 @@
+
 .ml-2{
     margin-left: 20px;
 }
@@ -110,6 +111,10 @@
     color: #a9a9a9;
   }
   
+  .sidebar-item:hover{
+    background-color: #000;
+  }
+
   /* 햄버거 메뉴 스타일 */
   .hamburger {
     display: none; /* 기본적으로 숨김 */

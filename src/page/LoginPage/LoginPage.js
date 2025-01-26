@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./style/login.style.css";
+
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,9 +15,18 @@ const Login = () => {
     console.log("Logging in with", { email, password });
   };
 
+  const handleGoogleLogin = async (googleData) => {
+    // Handle Google login success logic here
+    console.log("Google login successful:", googleData);
+  };
+
   return (
     <div className="login-container">
-      <div className="error-message" style={{ display: "none" }} id="error-message">
+      <div
+        className="error-message"
+        style={{ display: "none" }}
+        id="error-message"
+      >
         <div className="alert alert-danger">Login failed. Please try again.</div>
       </div>
       <form className="login-form" onSubmit={handleLoginWithEmail}>
@@ -38,12 +51,23 @@ const Login = () => {
         <button type="submit" className="login-button">
           LOG IN
         </button>
-
-          <a href="/register" className="signup-link">
-            SIGN IN
-          </a>
-        
+        <a href="/register" className="signup-link">
+          SIGN IN
+        </a>
       </form>
+      <div className="text-align-center mt-2">
+        <p>- Sign in with Google -</p>
+        <div className="display-center">
+          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => {
+                console.log("Google Login Failed");
+              }}
+            />
+          </GoogleOAuthProvider>
+        </div>
+      </div>
     </div>
   );
 };

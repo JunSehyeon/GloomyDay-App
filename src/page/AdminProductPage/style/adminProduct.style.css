@@ -1,50 +1,99 @@
-.card-area{
-    margin-top:20px;
-}
-.admin-product-card{
-    border:1px solid red;
-
-}
-.tag{
-    margin-left:10px
-}
-
-.display-flex{
-    display:flex;
-    align-items: center;
-}
-.locate-center{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* 전체 배경과 기본 폰트 컬러 설정 */
+body {
+    background-color: #000000;
+    color: #d3d3d3;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 검색 박스 스타일 */
+  .search-box {
     width: 100%;
-}
-.stock{
-    margin-right: 10px;
-}
-
-
-.mt-2{
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #222;
+    color: #fff;
+  }
+  
+  .search-box input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: 16px;
+  }
+  
+  /* 테이블 스타일 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
-}
+    background-color: #111;
+    border: 2px solid #ffffff;
+  }
+  
+  table th, table td {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  table th {
+    font-weight: bold;
+    background-color: #222;
+    color: #FFFFFF;
+  }
+  
+  table td {
+    background-color: #181818;
+    color: #FFFFFF;
+  }
+  
+  /* Pagination container styling */
 
-.form-container{
-    padding:20px
-}
-.mr-1{
-    margin-right: 10px;
-}
-
-.upload-image{
-    max-width: 458px;
-    width:100%
-}
-.display-center{
-    display: flex;
-    justify-content: center;
-}
-.error-message{
-    color: red;
-    font-size: 10pt;
-    padding-right: 10px;
-}
+  
+  .page-item {
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #ffffff;
+    color: #000000;
+    background-color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .page-link:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .page-item.active .page-link {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+  }
+  
+  .page-link:focus {
+    outline: none;
+  }
+  
+  .break-item .page-link {
+    color: #999;
+    cursor: default;
+    border: none;
+  }
+  
+  /* 다이얼로그 스타일 */
+  .dialog {
+    padding: 20px;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 10px;
+  }
+  

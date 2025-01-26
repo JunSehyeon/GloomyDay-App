@@ -14,9 +14,15 @@ const Sidebar = () => {
   const NavbarContent = () => {
     return (
       <div>
-        <Link to="/">
-          <img width={100} src="/image/hm-logo.png" alt="hm-logo.png" />
+  
+        <Link to="/" style={{
+      color: "#000000", // 링크 컬러를 블랙으로 지정
+      textDecoration: "none", // 밑줄 제거
+      fontWeight: "bold",
+    }}>
+          GroomyDay
         </Link>
+
         <div className="sidebar-item">Admin Account</div>
         <ul className="sidebar-area">
           <li
@@ -41,7 +47,6 @@ const Sidebar = () => {
 
       <Navbar bg="light" expand={false} className="mobile-sidebar-toggle">
         <Container fluid>
-          <img width={80} src="/image/hm-logo.png" alt="hm-logo.png" />
           <Navbar.Brand href="#"></Navbar.Brand>
           <Navbar.Toggle
             aria-controls={`offcanvasNavbar-expand`}
