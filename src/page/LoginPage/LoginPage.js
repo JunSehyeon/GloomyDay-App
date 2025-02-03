@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container, Form, Button, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./style/login.style.css";
-import { loginWithEmail, loginWithGoogle } from "../../features/user/userSlice";
-import { clearErrors } from "../../features/user/userSlice";
+import { clearErrors, loginWithEmail } from "../../features/user/userSlice";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = () => {
@@ -20,72 +18,53 @@ const Login = () => {
     if (loginError) {
       dispatch(clearErrors());
     }
-  }, [navigate]);
+  }, [dispatch, loginError]);
+
   const handleLoginWithEmail = (event) => {
     event.preventDefault();
     dispatch(loginWithEmail({ email, password }));
   };
 
-  const handleGoogleLogin = async (googleData) => {
-    //구글 로그인 하기
-  };
-
   if (user) {
     navigate("/");
   }
+
   return (
-    <>
-      <Container className="login-area">
-        {loginError && (
-          <div className="error-message">
-            <Alert variant="danger">{loginError}</Alert>
-          </div>
-        )}
-        <Form className="login-form" onSubmit={handleLoginWithEmail}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              required
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </Form.Group>
+    <div className="login-container">
+      {loginError && (
+        <div className="error-message">
+          <div className="alert alert-danger">Login failed. Please try again.</div>
+        </div>
+      )}
+      <form className="login-form" onSubmit={handleLoginWithEmail}>
+        <div className="form-group">
+          <input
+            type="email"
+            placeholder="ID"
+            required
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+        <button type="submit" className="login-button">
+          LOG IN
+        </button>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              required
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </Form.Group>
-          <div className="display-space-between login-button-area">
-            <Button variant="danger" type="submit">
-              Login
-            </Button>
-            <div>
-              아직 계정이 없으세요?<Link to="/register">회원가입 하기</Link>{" "}
-            </div>
-          </div>
-
-          <div className="text-align-center mt-2">
-            <p>-외부 계정으로 로그인하기-</p>
-            <div className="display-center">
-              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-                <GoogleLogin
-                  onSuccess={handleGoogleLogin}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
-              </GoogleOAuthProvider>
-            </div>
-          </div>
-        </Form>
-      </Container>
-    </>
+        <a href="/register" className="signup-link">
+          SIGN IN
+        </a>
+      </form>
+      
+    </div>
   );
 };
 
